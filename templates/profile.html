@@ -5,7 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мой профиль - {{ user.username }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
 </head>
+<header>
+    <nav>
+    <div class="logo">Texnopos</div>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'courses' %}">Курсы</a></li>
+                <li><a href="{% url 'teachers' %}">Преподаватели</a></li>
+                <li><a href="#">О нас</a></li>
+               
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'profile' %}">👤 {{ user.username }}</a></li>
+                    <li><a href="{% url 'logout' %}">Выйти</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
+                {% endif %}
+    </ul>
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</nav>
+</header>
 <body>
 
 <div class="profile-header">

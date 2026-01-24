@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f5f7fb;
+    color: #1f2937;
+    line-height: 1.6;
+}
+
+/* ---------------- PAGE HEADER ---------------- */
+
+.page-header {
+    background: linear-gradient(135deg, #1e3a8a, #0ea5e9);
+    color: white;
+    text-align: center;
+    padding: 70px 20px;
+}
+
+.page-header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+/* ---------------- CONTAINER ---------------- */
+
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+/* ---------------- FILTERS ---------------- */
+
+.filters {
+    margin-bottom: 30px;
+}
+
+.filters h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #0f172a;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-btn {
+    padding: 8px 18px;
+    border-radius: 20px;
+    background-color: #e5e7eb;
+    color: #1f2937;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.filter-btn:hover {
+    background-color: #38bdf8;
+    color: white;
+}
+
+.filter-btn.active {
+    background-color: #2563eb;
+    color: white;
+}
+
+/* ---------------- COURSES COUNT ---------------- */
+
+.courses-count {
+    margin-bottom: 25px;
+    font-size: 15px;
+    color: #374151;
+}
+
+/* ---------------- COURSES GRID ---------------- */
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+/* ---------------- COURSE CARD ---------------- */
+
+.course-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.course-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background-color: #e5e7eb;
+}
+
+.course-content {
+    padding: 20px;
+}
+
+.course-title {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #0f172a;
+}
+
+.course-teacher {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 6px;
+}
+
+.course-price {
+    font-weight: 600;
+    font-size: 16px;
+    color: #16a34a;
+}
+
+/* ---------------- BUTTON ---------------- */
+
+.btn {
+    background-color: #2563eb;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+/* ---------------- NO COURSES ---------------- */
+
+.no-courses {
+    background: white;
+    padding: 60px 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.no-courses h2 {
+    margin-bottom: 15px;
+    color: #0f172a;
+}
+
+.no-courses p {
+    color: #6b7280;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 28px;
+    }
+
+    .page-header p {
+        font-size: 16px;
+    }
+
+    .filters h3 {
+        font-size: 16px;
+    }
+}
+/* ---------------- HEADER & NAV ---------------- */
+
+header {
+    background-color: #0f172a;
+    padding: 15px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    color: #38bdf8;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links li a {
+    color: #e5e7eb;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #38bdf8;
+}
+
+/* Гамбургер (на будущее) */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: white;
+}
