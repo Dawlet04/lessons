@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+<section class="hero">
+    <h1> Учитесь у лучших преподавателей</h1>
+    <p>Программирование, веб-разработка, английский и русский язык</p>
+    <a href="#courses" class="btn">Начать обучение</a>
+</section>
+
+
+<div class="container">
+    <h2 class="section-title"> Категории курсов</h2>
+    <div class="categories">
+        {% for category in categories %}
+        <div class="category-card">
+            <h3>{{ category.name }}</h3>
+            <p>{{ category.description|default:"Изучайте с нуля" }}</p>
+        </div>
+        {% empty %}
+        <p>Категории скоро появятся...</p>
+        {% endfor %}
+    </div>
+</div>
+
+
+<div class="container" id="courses">
+    <h2 class="section-title"> Популярные курсы</h2>
+    <div class="courses-grid">
+        {% for course in popular_courses %}
+        <div class="course-card">
+            {% if course.icon %}
+            <img src="{{ course.icon.url }}" alt="{{ course.title }}" class="course-img">
+            {% else %}
+            <div class="course-img"></div>
+            {% endif %}
+            
+            <div class="course-content">
+                <h3 class="course-title">{{ course.title }}</h3>
+                <p class="course-teacher"> {{ course.teacher.user.get_full_name }}</p>
+                <p class="course-price">{{ course.price }} сум</p>
+            </div>
+        </div>
+        {% empty %}
+        <p>Курсы скоро появятся...</p>
+        {% endfor %}
+    </div>
+</div>
+
+
+<div class="container">
+    <h2 class="section-title"> Наши преподаватели</h2>
+    <div class="teachers-grid">
+        {% for teacher in top_teachers %}
+        <div class="teacher-card">
+            {% if teacher.user.avatar %}
+            <img src="{{ teacher.user.avatar.url }}" alt="{{ teacher.user.get_full_name }}" class="teacher-avatar">
+            {% else %}
+            <div class="teacher-avatar"></div>
+            {% endif %}
+            
+            <h3 class="teacher-name">{{ teacher.user.get_full_name }}</h3>
+            <p class="teacher-subject">{{ teacher.subject }}</p>
+            <p>{{ teacher.experience_years }} лет опыта</p>
+        </div>
+        {% empty %}
+        <p>Преподаватели скоро появятся...</p>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

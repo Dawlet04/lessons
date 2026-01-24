@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div class="page-header">
+    <h1> Все курсы</h1>
+    <p>Выберите курс и начните обучение прямо сейчас</p>
+</div>
+
+<div class="container">
+    <div class="filters">
+        <h3>Фильтр по категориям:</h3>
+        <div class="filter-buttons">
+            <a href="{% url 'courses' %}" class="filter-btn {% if not request.GET.category %}active{% endif %}">
+                Все курсы
+            </a>
+            {% for category in categories %}
+            <a href="?category={{ category.id }}" 
+               class="filter-btn {% if request.GET.category == category.id|stringformat:'s' %}active{% endif %}">
+                {{ category.name }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <div class="courses-count">
+        Найдено курсов: <strong>{{ courses.count }}</strong>
+    </div>
+
+
+    {% if courses %}
+    <div class="courses-grid">
+        {% for course in courses %}
+        <div class="course-card">
+            {% if course.icon %}
+            <img src="{{ course.icon.url }}" alt="{{ course.title }}" class="course-img">
+            {% else %}
+            <div class="course-img"></div>
+            {% endif %}
+            
+            <div class="course-content">
+                <h3 class="course-title">{{ course.title }}</h3>
+                <p class="course-teacher"> {{ course.teacher.user.get_full_name }}</p>
+                
+                {% if course.category %}
+                <p style="color: #888; font-size: 0.9rem; margin-bottom: 0.5rem;">
+                     {{ course.category.name }}
+                </p>
+                {% endif %}
+                
+                {% if course.hours %}
+                <p style="color: #888; font-size: 0.9rem; margin-bottom: 1rem;">
+                     {{ course.hours }} часов
+                </p>
+                {% endif %}
+                
+                <p class="course-price">{{ course.price }} сум</p>
+                
+                <a href="#" class="btn" style="display: block; text-align: center; margin-top: 1rem;">
+                    Подробнее
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="no-courses">
+        <h2> Курсы не найдены</h2>
+        <p>К сожалению, в этой категории пока нет курсов.</p>
+        <p><a href="{% url 'courses' %}" class="btn" style="margin-top: 1rem;">Посмотреть все курсы</a></p>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

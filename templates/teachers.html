@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+<div class="page-header">
+    <h1> Наши преподаватели</h1>
+    <p>Опытные специалисты готовы поделиться знаниями</p>
+</div>
+
+<div class="container">
+    <div class="teachers-count">
+        Всего преподавателей: <strong>{{ teachers.count }}</strong>
+    </div>
+
+    {% if teachers %}
+    <div class="teachers-grid">
+        {% for teacher in teachers %}
+        <div class="teacher-card-extended">
+            <div class="teacher-header">
+                {% if teacher.user.avatar %}
+                <img src="{{ teacher.user.avatar.url }}" alt="{{ teacher.user.get_full_name }}" class="teacher-avatar-big">
+                {% else %}
+                <div class="teacher-avatar-big"></div>
+                {% endif %}
+                
+                <div class="teacher-info">
+                    <h3>{{ teacher.user.get_full_name }}</h3>
+                    <p class="teacher-subject-big">{{ teacher.subject }}</p>
+                    
+                    <div class="teacher-stats">
+                        <div class="stat-item">
+                            <span></span>
+                            <span class="rating">{{ teacher.rating|floatformat:1 }}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span></span>
+                            <span>{{ teacher.total_courses }} курсов</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>👥</span>
+                            <span>{{ teacher.total_students }} студентов</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>🎓</span>
+                            <span>{{ teacher.experience_years }} лет опыта</span>
+                        </div>
+                    </div>
+                </div>
+
+
+</div>
+            
+            {% if teacher.bio %}
+            <p class="teacher-bio">{{ teacher.bio }}</p>
+            {% endif %}
+            
+            <a href="#" class="btn" style="display: inline-block; margin-top: 1rem;">
+                Посмотреть курсы
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="no-teachers">
+        <h2> Преподаватели не найдены</h2>
+        <p>Скоро здесь появятся лучшие преподаватели!</p>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Онлайн Обучение{% endblock %}</title>
+   
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Texnopos</div>
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'courses' %}">Курсы</a></li>
+                <li><a href="{% url 'teachers' %}">Преподаватели</a></li>
+                <li><a href="#">О нас</a></li>
+                
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'profile' %}">👤 {{ user.username }}</a></li>
+                    <li><a href="{% url 'logout' %}">Выйти</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+
+
+
+
+    <footer>
+        <p>&copy; 2025 Texnopos. Все права защищены.</p>
+    </footer>
+</body>
+</html>
