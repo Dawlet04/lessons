@@ -1,42 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static teachers.css' %}">
-</head>
-<header>
-    <nav>
-    <div class="logo">Texnopos</div>
-    <ul class="nav-links" id="navLinks">
-        <li><a href="{% url 'home' %}">Главная</a></li>
-                <li><a href="{% url 'courses' %}">Курсы</a></li>
-                <li><a href="{% url 'teachers' %}">Преподаватели</a></li>
-                <li><a href="#">О нас</a></li>
-               
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'profile' %}">👤 {{ user.username }}</a></li>
-                    <li><a href="{% url 'logout' %}">Выйти</a></li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Войти</a></li>
-                    <li><a href="{% url 'register' %}">Регистрация</a></li>
-                {% endif %}
-    </ul>
-    <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</nav>
-</header>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
+{% block title %}Преподаватели{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'teachers.css' %}">
+<link rel="stylesheet" href="{% static 'base.css' %}">
+{% endblock %}
+
+{% block content %}
 
 <div class="page-header">
-    <h1> Наши преподаватели</h1>
+    <h1>Наши преподаватели</h1>
     <p>Опытные специалисты готовы поделиться знаниями</p>
 </div>
 
@@ -49,11 +24,14 @@
     <div class="teachers-grid">
         {% for teacher in teachers %}
         <div class="teacher-card-extended">
+
             <div class="teacher-header">
                 {% if teacher.user.avatar %}
-                <img src="{{ teacher.user.avatar.url }}" alt="{{ teacher.user.get_full_name }}" class="teacher-avatar-big">
+                    <img src="{{ teacher.user.avatar.url }}" 
+                         alt="{{ teacher.user.get_full_name }}" 
+                         class="teacher-avatar-big">
                 {% else %}
-                <div class="teacher-avatar-big"></div>
+                    <div class="teacher-avatar-big"></div>
                 {% endif %}
                 
                 <div class="teacher-info">
@@ -62,26 +40,25 @@
                     
                     <div class="teacher-stats">
                         <div class="stat-item">
-                            <span></span>
                             <span class="rating">{{ teacher.rating|floatformat:1 }}</span>
                         </div>
+
                         <div class="stat-item">
-                            <span></span>
                             <span>{{ teacher.total_courses }} курсов</span>
                         </div>
+
                         <div class="stat-item">
                             <span>👥</span>
                             <span>{{ teacher.total_students }} студентов</span>
                         </div>
+
                         <div class="stat-item">
                             <span>🎓</span>
                             <span>{{ teacher.experience_years }} лет опыта</span>
                         </div>
                     </div>
                 </div>
-
-
-</div>
+            </div>
             
             {% if teacher.bio %}
             <p class="teacher-bio">{{ teacher.bio }}</p>
@@ -93,13 +70,13 @@
         </div>
         {% endfor %}
     </div>
+
     {% else %}
     <div class="no-teachers">
-        <h2> Преподаватели не найдены</h2>
+        <h2>Преподаватели не найдены</h2>
         <p>Скоро здесь появятся лучшие преподаватели!</p>
     </div>
     {% endif %}
 </div>
 
-</body>
-</html>
+{% endblock %}

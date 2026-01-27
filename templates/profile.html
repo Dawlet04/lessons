@@ -1,38 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой профиль - {{ user.username }}</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'profile.css' %}">
-</head>
-<header>
-    <nav>
-    <div class="logo">Texnopos</div>
-    <ul class="nav-links" id="navLinks">
-        <li><a href="{% url 'home' %}">Главная</a></li>
-                <li><a href="{% url 'courses' %}">Курсы</a></li>
-                <li><a href="{% url 'teachers' %}">Преподаватели</a></li>
-                <li><a href="#">О нас</a></li>
-               
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'profile' %}">👤 {{ user.username }}</a></li>
-                    <li><a href="{% url 'logout' %}">Выйти</a></li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Войти</a></li>
-                    <li><a href="{% url 'register' %}">Регистрация</a></li>
-                {% endif %}
-    </ul>
-    <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</nav>
-</header>
-<body>
+{% block title %}Мой профиль{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'profile.css' %}">
+<link rel="stylesheet" href="{% static 'base.css' %}">
+{% endblock %}
+
+{% block content %}
 
 <div class="profile-header">
     {% if user.avatar %}
@@ -41,25 +17,29 @@
         <div class="profile-avatar-big"></div>
     {% endif %}
     
-    <h1 class="profile-name">{{ user.get_full_name|default:user.username }}</h1>
+    <h1 class="profile-name">
+        {{ user.get_full_name|default:user.username }}
+    </h1>
+
     <p class="profile-role">
         {% if user.role == 'teacher' %}
-             Преподаватель
+            Преподаватель
         {% elif user.role == 'admin' %}
-             Администратор
+            Администратор
         {% else %}
-             Студент
+            Студент
         {% endif %}
     </p>
 </div>
 
 <div class="container">
     <div class="profile-content">
+
+        <!-- ========== SIDEBAR ========== -->
         <div class="profile-sidebar">
             <h3 style="margin-bottom: 1.5rem;">Информация</h3>
 
-
-<div class="profile-info">
+            <div class="profile-info">
                 <label>Email:</label>
                 <p>{{ user.email|default:"Не указан" }}</p>
             </div>
@@ -86,42 +66,50 @@
             </a>
         </div>
 
+        <!-- ========== MAIN ========== -->
         <div class="profile-main">
 
             {% if user.role == 'teacher' and teacher_courses %}
-            <h2 class="section-title"> Мои курсы</h2>
+            <h2 class="section-title">Мои курсы</h2>
+
             {% for course in teacher_courses %}
             <div class="course-item">
                 <div class="course-item-info">
                     <h4>{{ course.title }}</h4>
                     <p>
-                         {{ course.total_students }} студентов | 
-                         {{ course.average_rating|floatformat:1 }} | 
-                         {{ course.total_reviews }} отзывов
+                        {{ course.total_students }} студентов | 
+                        {{ course.average_rating|floatformat:1 }} | 
+                        {{ course.total_reviews }} отзывов
                     </p>
                 </div>
+
                 <div>
                     {% if course.is_published %}
                         <span class="badge badge-active">Опубликован</span>
                     {% else %}
-                        <span class="badge" style="background: #f8d7da; color: #721c24;">Черновик</span>
+                        <span class="badge" style="background: #f8d7da; color: #721c24;">
+                            Черновик
+                        </span>
                     {% endif %}
                 </div>
             </div>
             {% endfor %}
 
             {% elif enrollments %}
-            <h2 class="section-title"> Мои курсы</h2>
+            <h2 class="section-title">Мои курсы</h2>
+
             {% for enrollment in enrollments %}
             <div class="course-item">
                 <div class="course-item-info">
                     <h4>{{ enrollment.course.title }}</h4>
-                    <p> {{ enrollment.course.teacher.user.get_full_name }}</p>
+                    <p>{{ enrollment.course.teacher.user.get_full_name }}</p>
+
                     <p style="margin-top: 0.5rem;">
                         <span class="badge 
-                        {% if enrollment.status == 'active' %}badge-active
-                        {% elif enrollment.status == 'completed' %}badge-completed
-                        {% endif %}">
+                            {% if enrollment.status == 'active' %}badge-active
+                            {% elif enrollment.status == 'completed' %}badge-completed
+                            {% endif %}
+                        ">
                             {{ enrollment.get_status_display }}
                         </span>
                     </p>
@@ -131,9 +119,10 @@
                     <p style="margin-bottom: 0.5rem; color: #666;">
                         Прогресс: {{ enrollment.progress }}%
                     </p>
-                    <div class="progress-bar">
-                        <div class="progress-fill" ></div>
+<div class="progress-bar">
+                        <div class="progress-fill"></div>
                     </div>
+
                     <a href="#" class="btn" style="margin-top: 1rem; display: inline-block;">
                         Продолжить
                     </a>
@@ -143,7 +132,7 @@
 
             {% else %}
             <div class="empty-state">
-                <h3> У вас пока нет курсов</h3>
+                <h3>У вас пока нет курсов</h3>
                 <p>Начните обучение прямо сейчас!</p>
                 <a href="{% url 'courses' %}" class="btn" style="margin-top: 1.5rem;">
                     Выбрать курс
@@ -155,5 +144,4 @@
     </div>
 </div>
 
-</body>
-</html>                                                                                                                                                             
+{% endblock %}

@@ -134,3 +134,18 @@ def profile(request):
 def about(request):
     return render(request, 'about.html')
 
+def about(request):
+    """Страница О нас"""
+    # Статистика
+    total_courses = Course.objects.filter(is_published=True).count()
+    total_teachers = Teacher.objects.count()
+    total_students = Users.objects.filter(role='student').count()
+    
+    context = {
+        'total_courses': total_courses,
+        'total_teachers': total_teachers,
+        'total_students': total_students,
+    }
+    
+    return render(request, 'about.html', context)
+

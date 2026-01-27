@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}О нас{% endblock %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'base.css' %}">
+<link rel="stylesheet" href="{% static 'about.css' %}">vv
+{% endblock %}
+
+
+{% block content %}
+
+<div class="stats-section">
+    <div class="stats-grid">
+        <div class="stat-item">
+            <div class="stat-number">{{ total_courses }}+</div>
+            <div class="stat-label">Онлайн-курсов</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">{{ total_teachers }}+</div>
+            <div class="stat-label">Опытных преподавателей</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">{{ total_students }}+</div>
+            <div class="stat-label">Довольных студентов</div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="about-section">
+        <h2>Наша миссия</h2>
+        <div class="about-content">
+            <p>
+                Мы верим, что качественное образование должно быть доступно каждому. Наша платформа объединяет 
+                лучших преподавателей программирования, веб-разработки и иностранных языков, чтобы помочь вам 
+                достичь ваших целей.
+            </p>
+            <p style="margin-top: 1.5rem;">
+                С 2020 года мы помогаем студентам осваивать новые профессии в IT-сфере и совершенствовать 
+                знание английского и русского языков. Наши курсы разработаны практикующими специалистами 
+                и адаптированы под современные требования рынка.
+            </p>
+        </div>
+    </div>
+
+    <div class="about-section">
+        <h2>Почему выбирают нас</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Практический подход</h3>
+                <p>Все курсы включают реальные проекты и практические задания, которые можно добавить в портфолио</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Опытные преподаватели</h3>
+                <p>Наши учителя - это практикующие специалисты с многолетним опытом работы в IT и образовании</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Гибкий график</h3>
+                <p>Учитесь в удобное время из любой точки мира. Все материалы доступны 24/7</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Сертификаты</h3>
+                <p>После успешного завершения курса вы получаете сертификат, подтверждающий ваши знания</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Поддержка</h3>
+                <p>Персональная помощь преподавателей и активное комьюнити студентов</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Доступные цены</h3>
+                <p>Качественное образование по разумным ценам с возможностью рассрочки</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="team-section">
+    <div class="container">
+        <h2 class="section-title">Наши ценности</h2>
+        <div class="values-grid">
+            <div class="value-item">
+                <h4>Качество</h4>
+                <p>Мы тщательно отбираем преподавателей и проверяем все учебные материалы</p>
+            </div>
+
+            <div class="value-item">
+                <h4>Доступность</h4>
+                <p>Образование должно быть доступно каждому, независимо от местоположения</p>
+            </div>
+
+            <div class="value-item">
+                <h4>Инновации</h4>
+                <p>Мы постоянно внедряем новые технологии для улучшения процесса обучения</p>
+            </div>
+
+            <div class="value-item">
+                <h4>Результат</h4>
+                <p>Наша цель - не просто дать знания, а помочь вам достичь карьерных целей</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cta-section">
+    <h2>Готовы начать обучение?</h2>
+    <p>Присоединяйтесь к тысячам студентов, которые уже меняют свою жизнь</p>
+    <a href="{% url 'courses' %}" class="btn-white">Выбрать курс</a>
+</div>
+
+{% endblock %}

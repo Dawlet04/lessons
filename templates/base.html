@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}Texnopos{% endblock %}
+    </title>
+
+    <!-- Общий стиль для всего сайта -->
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+
+    <!-- Стили для конкретной страницы -->
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- ================= HEADER / NAV ================= -->
+
+<header>
+    <nav class="container">
+        <div class="logo">Texnopos</div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="{% url 'home' %}">Главная</a></li>
+            <li><a href="{% url 'courses' %}">Курсы</a></li>
+            <li><a href="{% url 'teachers' %}">Преподаватели</a></li>
+            <li><a href="{% url 'about' %}">О нас</a></li>
+
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'profile' %}">👤 {{ user.username }}</a></li>
+                <li><a href="{% url 'logout' %}">Выйти</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Войти</a></li>
+                <li><a href="{% url 'register' %}">Регистрация</a></li>
+            {% endif %}
+        </ul>
+
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+</header>
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main>
+    {% block content %}
+    <!-- Сюда будет подставляться контент страниц -->
+    {% endblock %}
+</main>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+    <div class="footer-container">
+        <div>
+            <h4>Texnopos</h4>
+            <p>Платформа онлайн-обучения программированию и языкам.</p>
+        </div>
+
+        <div>
+            <h4>Навигация</h4>
+            <a href="{% url 'home' %}">Главная</a>
+            <a href="{% url 'courses' %}">Курсы</a>
+            <a href="{% url 'teachers' %}">Преподаватели</a>
+            <a href="{% url 'about' %}">О нас</a>
+        </div>
+
+        <div>
+            <h4>Аккаунт</h4>
+            {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}">Профиль</a>
+                <a href="{% url 'logout' %}">Выйти</a>
+            {% else %}
+                <a href="{% url 'login' %}">Войти</a>
+                <a href="{% url 'register' %}">Регистрация</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; color: #6b7280;">
+        © {{ now|default:2026 }} Texnopos. Все права защищены.
+    </div>
+</footer>
+
+</body>
+</html>

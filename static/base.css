@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f5f7fb;
+    color: #1f2937;
+    line-height: 1.6;
+}
+
+/* ---------------- LAYOUT ---------------- */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ---------------- HEADER & NAV ---------------- */
+
+header {
+    background-color: #0f172a;
+    padding: 15px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    color: #38bdf8;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links li a {
+    color: #e5e7eb;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #38bdf8;
+}
+
+.nav-links li a.active {
+    color: #38bdf8;
+    border-bottom: 2px solid #38bdf8;
+    padding-bottom: 3px;
+}
+
+/* ---------------- BUTTONS ---------------- */
+
+.btn {
+    background-color: #2563eb;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+}
+
+.btn:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+/* ---------------- TITLES ---------------- */
+
+.section-title {
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #0f172a;
+}
+
+/* ---------------- CARDS ---------------- */
+
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    padding: 25px;
+}
+
+/* ---------------- FOOTER ---------------- */
+
+footer {
+    background-color: #0f172a;
+    color: #9ca3af;
+    padding: 40px 20px;
+    margin-top: 80px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+.footer-container h4 {
+    color: white;
+    margin-bottom: 15px;
+}
+
+.footer-container a {
+    color: #9ca3af;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.footer-container a:hover {
+    color: #38bdf8;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+}
