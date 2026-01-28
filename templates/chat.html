@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <link rel="stylesheet" href="{% static 'chat.css' %}">
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">
+        💬 Chat room
+    </div>
+
+    <div id="chat-log" class="chat-messages"></div>
+
+    <div class="chat-input">
+        <input id="chat-message-input" type="text" placeholder="Введите сообщение..." autocomplete="off">
+        <button id="chat-message-submit">➤</button>
+    </div>
+</div>
+
+<script>
+    const roomName = "{{ room_name }}";
+    const chatSocket = new WebSocket(
+        'ws://' + window.location.host + '/ws/chat/' + roomName + '/'
+    );
+
+    const chatLog = document.getElementById('chat-log');
+    const input = document.getElementById('chat-message-input');
+    const submit = document.getElementById('chat-message-submit');
+
+    chatSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message', 'other');
+        messageElement.innerText = data.message;
+        chatLog.appendChild(messageElement);
+        chatLog.scrollTop = chatLog.scrollHeight;
+    };
+
+    submit.onclick = function() {
+        if (input.value.trim() === '') return;
+
+        chatSocket.send(JSON.stringify({
+            'message': input.value
+        }));
+
+        const myMessage = document.createElement('div');
+        myMessage.classList.add('message', 'me');
+        myMessage.innerText = input.value;
+        chatLog.appendChild(myMessage);
+
+        input.value = '';
+        chatLog.scrollTop = chatLog.scrollHeight;
+    };
+
+    input.addEventListener("keyup", function(e) {
+        if (e.key === "Enter") submit.click();
+    });
+</script>
+
+</body>
+</html>
