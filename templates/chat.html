@@ -8,57 +8,141 @@
 </head>
 <body>
 
-<div class="chat-container">
-    <div class="chat-header">
-        💬 Chat room
-    </div>
+<div class="app">
 
-    <div id="chat-log" class="chat-messages"></div>
+    <!-- LEFT: USERS -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            👤 {{ current_user.username }}
+            {% if is_admin %}
+                <span class="role">ADMIN</span>
+            {% endif %}
+        </div>
 
-    <div class="chat-input">
-        <input id="chat-message-input" type="text" placeholder="Введите сообщение..." autocomplete="off">
-        <button id="chat-message-submit">➤</button>
-    </div>
+        <ul class="user-list">
+            {% for user in other_users %}
+                <li class="user-item"
+                    data-user-id="{{ user.id }}"
+                    data-username="{{ user.username }}">
+                    {{ user.username }}
+                </li>
+            {% empty %}
+                <li class="empty">Нет пользователей</li>
+            {% endfor %}
+        </ul>
+    </aside>
+
+    <!-- RIGHT: CHAT -->
+    <main class="chat">
+        <div class="chat-header">
+            <span id="chat-with">Выберите пользователя</span>
+        </div>
+
+        <div id="chat-log" class="chat-messages"></div>
+
+        <div class="chat-input">
+            <input id="chat-message-input"
+                   type="text"
+                   placeholder="Введите сообщение..."
+                   disabled>
+            <button id="chat-message-submit" disabled>➤</button>
+        </div>
+    </main>
+
 </div>
 
 <script>
-    const roomName = "{{ room_name }}";
-    const chatSocket = new WebSocket(
-        'ws://' + window.location.host + '/ws/chat/' + roomName + '/'
-    );
+const CURRENT_USER = "{{ current_user.username }}";
 
-    const chatLog = document.getElementById('chat-log');
-    const input = document.getElementById('chat-message-input');
-    const submit = document.getElementById('chat-message-submit');
+let socket = null;
+let recipientId = null;
 
-    chatSocket.onmessage = function(e) {
-        const data = JSON.parse(e.data);
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('message', 'other');
-        messageElement.innerText = data.message;
-        chatLog.appendChild(messageElement);
-        chatLog.scrollTop = chatLog.scrollHeight;
+const chatLog = document.getElementById('chat-log');
+const input = document.getElementById('chat-message-input');
+const submit = document.getElementById('chat-message-submit');
+const chatWith = document.getElementById('chat-with');
+
+/* ================= USERS CLICK ================= */
+
+document.querySelectorAll('.user-item').forEach(item => {
+    item.onclick = () => {
+        recipientId = item.dataset.userId;
+        chatWith.textContent = item.dataset.username;
+
+        chatLog.innerHTML = '';
+        input.disabled = false;
+        submit.disabled = false;
+
+        if (socket) socket.close();
+
+        socket = new WebSocket(
+            'ws://' + window.location.host + '/ws/chat/' + recipientId + '/'
+        );
+
+        socket.onmessage = e => {
+            const data = JSON.parse(e.data);
+            addMessage(
+                data.message,
+                data.sender,
+                data.sender === CURRENT_USER
+            );
+        };
+
+        fetch(`/api/messages/${recipientId}/`)
+            .then(res => res.json())
+            .then(data => {
+                data.messages.forEach(msg => {
+                    addMessage(
+                        msg.text,
+                        msg.sender__username,
+                        msg.sender__username === CURRENT_USER
+                    );
+                });
+            });
     };
+});
 
-    submit.onclick = function() {
-        if (input.value.trim() === '') return;
+/* ================= SEND ================= */
 
-        chatSocket.send(JSON.stringify({
-            'message': input.value
-        }));
+submit.onclick = sendMessage;
+input.addEventListener("keyup", e => {
+    if (e.key === "Enter") sendMessage();
+});
 
-        const myMessage = document.createElement('div');
-        myMessage.classList.add('message', 'me');
-        myMessage.innerText = input.value;
-        chatLog.appendChild(myMessage);
+function sendMessage() {
+    if (!socket || socket.readyState !== WebSocket.OPEN) return;
+    if (!input.value.trim()) return;
 
-        input.value = '';
-        chatLog.scrollTop = chatLog.scrollHeight;
-    };
+    socket.send(JSON.stringify({
+        message: input.value,
+        recipient_id: recipientId
+    }));
 
-    input.addEventListener("keyup", function(e) {
-        if (e.key === "Enter") submit.click();
-    });
+    addMessage(input.value, CURRENT_USER, true);
+    input.value = '';
+}
+
+/* ================= UI ================= */
+
+function addMessage(text, sender, mine=false) {
+    const div = document.createElement('div');
+    div.className = mine ? 'message me' : 'message other';
+
+    const name = document.createElement('strong');
+    name.innerText = sender;
+
+    const br = document.createElement('br');
+
+    const msg = document.createElement('span');
+    msg.innerText = text;
+
+    div.appendChild(name);
+    div.appendChild(br);
+    div.appendChild(msg);
+
+    chatLog.appendChild(div);
+    chatLog.scrollTop = chatLog.scrollHeight;
+}
 </script>
 
 </body>
