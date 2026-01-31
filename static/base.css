@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+
+
 * {
     margin: 0;
     padding: 0;
@@ -12,6 +14,36 @@ body {
     color: #1f2937;
     line-height: 1.6;
 }
+
+.chat-float-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+
+    background: #4f46e5;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 26px;
+    text-decoration: none;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    transition: transform 0.2s ease, background 0.2s ease;
+    z-index: 999;
+}
+
+.chat-float-btn:hover {
+    background: #4338ca;
+    transform: scale(1.1);
+}
+
 
 /* ---------------- LAYOUT ---------------- */
 

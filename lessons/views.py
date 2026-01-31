@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from .models import Course, Category, Teacher, Users
+from .models import Course, Category, Teacher, Users, Enrollment
 from django.contrib.auth.decorators import login_required
 def home(request):
     popular_courses = Course.objects.filter(is_published=True).order_by('-created_at')[:6]
