@@ -27,7 +27,7 @@ def register(request):
         last_name = request.POST.get('last_name')
         phone_num = request.POST.get('phone_num')
         
-        # Проверки
+     
         if password != password2:
             messages.error(request, 'Пароли не совпадают!')
             return redirect('register')
@@ -58,7 +58,6 @@ def register(request):
 
 
 def login_view(request):
-    """Вход в систему"""
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -77,14 +76,13 @@ def login_view(request):
 
 
 def logout_view(request):
-    """Выход из системы"""
     logout(request)
     messages.success(request, 'Вы вышли из системы.')
     return redirect('home')
 
 
 def courses(request):
-    """Страница всех курсов"""
+  
     all_courses = Course.objects.filter(is_published=True).order_by('-created_at')
     categories = Category.objects.all()
     
@@ -103,7 +101,7 @@ def courses(request):
 
 
 def teachers(request):
-    """Страница всех преподавателей"""
+  
     all_teachers = Teacher.objects.all().order_by('-rating')
     
     context = {
@@ -115,7 +113,7 @@ def teachers(request):
 
 @login_required
 def profile(request):
-    """Профиль пользователя"""
+ 
     user = request.user
 
     enrollments = Enrollment.objects.filter(user=user).select_related('course')
@@ -135,8 +133,7 @@ def about(request):
     return render(request, 'about.html')
 
 def about(request):
-    """Страница О нас"""
-    # Статистика
+  
     total_courses = Course.objects.filter(is_published=True).count()
     total_teachers = Teacher.objects.count()
     total_students = Users.objects.filter(role='student').count()
