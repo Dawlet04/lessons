@@ -1,175 +1,277 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* ===============================================
+   REGISTER PAGE STYLES
+   =============================================== */
 
 body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #1e3a8a, #0ea5e9);
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     min-height: 100vh;
-    color: #1f2937;
-}
-
-/* ---------------- HEADER & NAV ---------------- */
-
-header {
-    background-color: #0f172a;
-    padding: 15px 40px;
-}
-
-nav {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    position: relative;
 }
 
-.logo {
-    color: #38bdf8;
-    font-size: 24px;
-    font-weight: 700;
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    z-index: 0;
 }
 
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 25px;
+main {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: 2rem;
 }
 
-.nav-links li a {
-    color: #e5e7eb;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.nav-links li a:hover {
-    color: #38bdf8;
-}
-
-.hamburger {
-    display: none;
-}
-
-/* ---------------- AUTH CONTAINER ---------------- */
-
+/* Auth Container */
 .auth-container {
-    max-width: 460px;
-    margin: 60px auto;
+    max-width: 540px;
+    margin: 0 auto;
     background: white;
-    padding: 40px 35px;
-    border-radius: 14px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 3rem;
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.5s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #f093fb, #f5576c, #fd868c);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .auth-title {
+    font-size: 2.25rem;
     text-align: center;
-    font-size: 26px;
-    margin-bottom: 25px;
+    margin-bottom: 2rem;
     color: #0f172a;
+    font-weight: 800;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-/* ---------------- FORM ---------------- */
-
-.form-group {
-    margin-bottom: 16px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 6px;
-    font-size: 14px;
-    color: #374151;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 11px 14px;
-    border-radius: 8px;
-    border: 1px solid #d1d5db;
-    font-size: 15px;
-    transition: border 0.3s, box-shadow 0.3s;
-}
-
-.form-group input:focus {
-    outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
-}
-
-/* ---------------- BUTTON ---------------- */
-
-.btn-submit {
-    width: 100%;
-    background-color: #2563eb;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 15px;
-    transition: background 0.3s, transform 0.2s;
-}
-
-.btn-submit:hover {
-    background-color: #1d4ed8;
-    transform: translateY(-2px);
-}
-
-/* ---------------- LINKS ---------------- */
-
-.auth-link {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 14px;
-}
-
-.auth-link a {
-    color: #2563eb;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.auth-link a:hover {
-    text-decoration: underline;
-}
-
-/* ---------------- MESSAGES ---------------- */
-
+/* Messages */
 .messages {
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
 }
 
 .alert {
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 14px;
-    margin-bottom: 10px;
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .alert-error {
-    background-color: #fee2e2;
-    color: #991b1b;
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #dc2626;
+    border-left: 4px solid #dc2626;
 }
 
 .alert-success {
-    background-color: #dcfce7;
-    color: #166534;
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #059669;
+    border-left: 4px solid #059669;
 }
 
-/* ---------------- RESPONSIVE ---------------- */
+.alert-warning {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    color: #d97706;
+    border-left: 4px solid #d97706;
+}
 
-@media (max-width: 480px) {
+.alert-info {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    color: #2563eb;
+    border-left: 4px solid #2563eb;
+}
+
+/* Form */
+form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group:nth-child(1),
+.form-group:nth-child(2),
+.form-group:nth-child(6),
+.form-group:nth-child(7) {
+    grid-column: span 2;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 0.5rem;
+    font-size: 0.9375rem;
+}
+
+.form-group input,
+.form-group select {
+    padding: 1rem 1.25rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: #f8fafc;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #ec4899;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.1);
+    transform: translateY(-2px);
+}
+
+.form-group input::placeholder {
+    color: #94a3b8;
+}
+
+/* Submit Button */
+.btn-submit {
+    grid-column: span 2;
+    padding: 1.125rem 2rem;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+    position: relative;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.btn-submit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-submit:hover::before {
+    left: 100%;
+}
+
+.btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(240, 147, 251, 0.5);
+}
+
+.btn-submit:active {
+    transform: translateY(-1px);
+}
+
+/* Auth Link */
+.auth-link {
+    grid-column: span 2;
+    text-align: center;
+    margin-top: 1rem;
+    color: #64748b;
+    font-size: 0.9375rem;
+}
+
+.auth-link a {
+    color: #ec4899;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.auth-link a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #ec4899;
+    transition: width 0.3s ease;
+}
+
+.auth-link a:hover::after {
+    width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
     .auth-container {
-        margin: 40px 15px;
-        padding: 30px 25px;
+        padding: 2rem;
+        border-radius: 20px;
     }
-
+    
     .auth-title {
-        font-size: 22px;
+        font-size: 1.875rem;
+    }
+    
+    form {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+    
+    .form-group:nth-child(1),
+    .form-group:nth-child(2),
+    .form-group:nth-child(6),
+    .form-group:nth-child(7) {
+        grid-column: span 1;
+    }
+    
+    .btn-submit,
+    .auth-link {
+        grid-column: span 1;
     }
 }

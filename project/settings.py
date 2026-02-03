@@ -41,6 +41,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+}
+
 ROOT_URLCONF = 'project.urls'
 AUTH_USER_MODEL = "lessons.Users"
 TEMPLATES = [
@@ -112,13 +118,10 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = 'media/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

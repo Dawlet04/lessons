@@ -1,267 +1,286 @@
+/* ===============================================
+   PROFILE PAGE STYLES
+   =============================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f5f7fb;
-    color: #1f2937;
-    line-height: 1.6;
-}
-
-/* ---------------- HEADER & NAV ---------------- */
-
-header {
-    background-color: #0f172a;
-    padding: 15px 40px;
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo {
-    color: #38bdf8;
-    font-size: 24px;
-    font-weight: 700;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-}
-
-.nav-links li a {
-    color: #e5e7eb;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.nav-links li a:hover {
-    color: #38bdf8;
-}
-
-.hamburger {
-    display: none;
-}
-
-/* ---------------- PROFILE HEADER ---------------- */
-
+/* Profile Header */
 .profile-header {
-    background: linear-gradient(135deg, #1e3a8a, #0ea5e9);
-    color: white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     text-align: center;
-    padding: 70px 20px 90px;
+    padding: 4rem 1.5rem 3rem;
+    margin-bottom: 3rem;
     position: relative;
+    overflow: hidden;
+}
+
+.profile-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 2px, transparent 2px);
+    background-size: 60px 60px;
+    animation: drift 50s linear infinite;
+}
+
+@keyframes drift {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .profile-avatar-big {
-    width: 140px;
-    height: 140px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    margin: 0 auto 1.5rem;
+    border: 6px solid white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     object-fit: cover;
-    background-color: #e5e7eb;
-    border: 4px solid white;
-    margin: 0 auto 15px;
+    position: relative;
+    animation: fadeInScale 0.6s ease-out;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .profile-name {
-    font-size: 28px;
-    margin-bottom: 5px;
+    position: relative;
+    color: white;
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    margin-bottom: 0.5rem;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 0.6s ease-out 0.2s backwards;
 }
 
 .profile-role {
-    font-size: 16px;
-    opacity: 0.9;
+    position: relative;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.25rem;
+    font-weight: 600;
+    animation: fadeInUp 0.6s ease-out 0.3s backwards;
 }
 
-/* ---------------- CONTAINER ---------------- */
-
-.container {
-    max-width: 1200px;
-    margin: -50px auto 60px;
-    padding: 0 20px;
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* ---------------- PROFILE CONTENT ---------------- */
-
+/* Profile Content Layout */
 .profile-content {
     display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 30px;
+    grid-template-columns: 350px 1fr;
+    gap: 2.5rem;
+    align-items: start;
 }
 
-/* ---------------- SIDEBAR ---------------- */
-
+/* Profile Sidebar */
 .profile-sidebar {
     background: white;
-    padding: 30px 25px;
-    border-radius: 14px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 2.5rem;
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 2px solid #f1f5f9;
+    position: sticky;
+    top: 100px;
+}
+
+.profile-sidebar h3 {
+    color: #0f172a;
+    font-size: 1.5rem;
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+
+.profile-sidebar h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 2px;
 }
 
 .profile-info {
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.profile-info:last-of-type {
+    border-bottom: none;
 }
 
 .profile-info label {
-    font-size: 13px;
-    color: #6b7280;
+    display: block;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .profile-info p {
-    font-size: 15px;
+    color: #0f172a;
+    font-size: 1rem;
     font-weight: 500;
-    margin-top: 3px;
+    margin: 0;
 }
 
-/* ---------------- MAIN ---------------- */
-
+/* Profile Main Content */
 .profile-main {
     background: white;
-    padding: 30px;
-    border-radius: 14px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 2.5rem;
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 2px solid #f1f5f9;
+    min-height: 400px;
 }
 
-.section-title {
-    font-size: 22px;
-    margin-bottom: 25px;
-    color: #0f172a;
-}
-
-/* ---------------- COURSE ITEM ---------------- */
-
+/* Course Item */
 .course-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 20px;
-    border-radius: 10px;
-    background-color: #f9fafb;
-    margin-bottom: 15px;
-    transition: background 0.3s;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
 }
 
 .course-item:hover {
-    background-color: #eef2ff;
+    transform: translateX(8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: #6366f1;
 }
 
 .course-item-info h4 {
-    font-size: 17px;
-    margin-bottom: 6px;
+    font-size: 1.375rem;
+    color: #0f172a;
+    margin-bottom: 0.75rem;
 }
 
 .course-item-info p {
-    font-size: 14px;
-    color: #6b7280;
+    color: #64748b;
+    font-size: 0.9375rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
 }
 
-/* ---------------- BADGES ---------------- */
-
-.badge {
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    background-color: #e5e7eb;
-    color: #374151;
+.course-item-info p::before {
+    content: '📊';
 }
 
-.badge-active {
-    background-color: #dcfce7;
-    color: #166534;
-}
-
-.badge-completed {
-    background-color: #dbeafe;
-    color: #1e40af;
-}
-
-/* ---------------- PROGRESS ---------------- */
-
-.progress-bar {
-    width: 160px;
-    height: 8px;
-    background-color: #e5e7eb;
-    border-radius: 10px;
+/* Progress Bar in Profile */
+.course-item .progress-bar {
+    width: 200px;
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 5px;
     overflow: hidden;
 }
 
-.progress-fill {
+.course-item .progress-fill {
     height: 100%;
-    width: 50%; /* потом можно менять через style */
-    background: linear-gradient(90deg, #2563eb, #38bdf8);
-    border-radius: 10px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 5px;
 }
 
-/* ---------------- EMPTY STATE ---------------- */
-
+/* Empty State */
 .empty-state {
     text-align: center;
-    padding: 60px 20px;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 20px;
+    border: 2px dashed #cbd5e1;
 }
 
 .empty-state h3 {
-    font-size: 22px;
-    margin-bottom: 10px;
+    font-size: 1.75rem;
+    color: #0f172a;
+    margin-bottom: 1rem;
 }
 
 .empty-state p {
-    color: #6b7280;
+    font-size: 1.125rem;
+    color: #64748b;
 }
 
-/* ---------------- BUTTON ---------------- */
-
-.btn {
-    background-color: #2563eb;
-    color: white;
-    padding: 10px 22px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background 0.3s, transform 0.2s;
-}
-
-.btn:hover {
-    background-color: #1d4ed8;
-    transform: translateY(-2px);
-}
-
-
-/* ---------------- RESPONSIVE ---------------- */
-
-@media (max-width: 900px) {
+/* Responsive */
+@media (max-width: 1024px) {
     .profile-content {
         grid-template-columns: 1fr;
     }
-
-    .container {
-        margin-top: -30px;
+    
+    .profile-sidebar {
+        position: static;
     }
 }
 
-@media (max-width: 500px) {
-    .profile-name {
-        font-size: 22px;
+@media (max-width: 768px) {
+    .profile-header {
+        padding: 3rem 1.5rem 2rem;
     }
-
+    
+    .profile-avatar-big {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .profile-sidebar,
+    .profile-main {
+        padding: 1.75rem;
+    }
+    
     .course-item {
         flex-direction: column;
         align-items: flex-start;
-        gap: 15px;
+        gap: 1.5rem;
     }
-
-    .progress-bar {
+    
+    .course-item > div:last-child {
         width: 100%;
+        text-align: left;
+    }
+    
+    .course-item .progress-bar {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-avatar-big {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .course-item {
+        padding: 1.5rem;
     }
 }

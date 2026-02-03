@@ -1,257 +1,274 @@
+/* ===============================================
+   HOME PAGE STYLES
+   =============================================== */
 
-/* Подключаем шрифт */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f5f7fb;
-    color: #1f2937;
-    line-height: 1.6;
-}
-
-/* ---------------- HEADER & NAV ---------------- */
-
-header {
-    background-color: #0f172a;
-    padding: 15px 40px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo {
-    color: #38bdf8;
-    font-size: 24px;
-    font-weight: 700;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-}
-
-.nav-links li a {
-    color: #e5e7eb;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.nav-links li a:hover {
-    color: #38bdf8;
-}
-
-/* Гамбургер (на будущее) */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background: white;
-}
-
-/* ---------------- HERO SECTION ---------------- */
-
+/* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #1e3a8a, #0ea5e9);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     text-align: center;
-    padding: 100px 20px;
+    padding: 8rem 1.5rem 6rem;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 4rem;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.4;
 }
 
 .hero h1 {
-    font-size: 42px;
-    margin-bottom: 15px;
+    position: relative;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 1rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .hero p {
-    font-size: 18px;
-    margin-bottom: 30px;
+    position: relative;
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    margin-bottom: 2.5rem;
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeInUp 0.8s ease-out 0.2s backwards;
 }
 
 .hero .btn {
-    background-color: white;
-    color: #1e3a8a;
-    padding: 12px 28px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background 0.3s, transform 0.2s;
+    position: relative;
+    background: white;
+    color: #667eea;
+    font-size: 1.125rem;
+    padding: 1rem 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 0.8s ease-out 0.4s backwards;
 }
 
 .hero .btn:hover {
-    background-color: #e0f2fe;
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* ---------------- CONTAINERS ---------------- */
-
-.container {
-    max-width: 1200px;
-    margin: 60px auto;
-    padding: 0 20px;
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.section-title {
-    font-size: 28px;
-    margin-bottom: 30px;
-    text-align: center;
-    color: #0f172a;
-}
-
-/* ---------------- CATEGORIES ---------------- */
-
+/* Categories Section */
 .categories {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 5rem;
 }
 
 .category-card {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s, box-shadow 0.3s;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
 }
 
-.category-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.category-card:hover::before {
+    opacity: 1;
+}
+
+.category-card:nth-child(1) {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+
+.category-card:nth-child(2) {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.category-card:nth-child(3) {
+    background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+}
+
+.category-card:nth-child(4) {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
 }
 
 .category-card h3 {
-    margin-bottom: 10px;
-    color: #1e3a8a;
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+    color: #1e293b;
+    position: relative;
 }
 
-/* ---------------- COURSES ---------------- */
+.category-card p {
+    color: #475569;
+    font-weight: 500;
+    position: relative;
+}
 
+.category-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Courses Grid */
 .courses-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 5rem;
 }
 
 .course-card {
     background: white;
-    border-radius: 12px;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
 }
 
 .course-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 .course-img {
     width: 100%;
-    height: 180px;
+    height: 220px;
     object-fit: cover;
-    background-color: #e5e7eb;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
 }
 
 .course-content {
-    padding: 20px;
+    padding: 1.75rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .course-title {
-    font-size: 18px;
-    margin-bottom: 8px;
+    font-size: 1.375rem;
+    margin-bottom: 0.5rem;
     color: #0f172a;
+    line-height: 1.3;
 }
 
 .course-teacher {
-    font-size: 14px;
-    color: #6b7280;
-    margin-bottom: 10px;
+    color: #64748b;
+    font-size: 0.9375rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
 }
 
 .course-price {
-    font-weight: 600;
-    color: #16a34a;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #6366f1;
+    margin-top: auto;
 }
 
-/* ---------------- TEACHERS ---------------- */
-
+/* Teachers Grid */
 .teachers-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 5rem;
 }
 
 .teacher-card {
     background: white;
-    padding: 25px;
-    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 2px solid #f1f5f9;
 }
 
 .teacher-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    border-color: #6366f1;
 }
 
 .teacher-avatar {
     width: 120px;
     height: 120px;
     border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 0 auto 1.5rem;
+    border: 4px solid white;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
     object-fit: cover;
-    background-color: #e5e7eb;
-    margin: 0 auto 15px;
 }
 
 .teacher-name {
-    font-size: 18px;
-    margin-bottom: 5px;
+    font-size: 1.375rem;
+    margin-bottom: 0.5rem;
     color: #0f172a;
 }
 
-
 .teacher-subject {
-    font-size: 14px;
-    color: #2563eb;
-    margin-bottom: 8px;
+    color: #6366f1;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
 }
 
-/* ---------------- RESPONSIVE ---------------- */
+.teacher-card p {
+    color: #64748b;
+    font-size: 0.9375rem;
+}
 
+/* Responsive */
 @media (max-width: 768px) {
-    .nav-links {
-        display: none;
+    .hero {
+        padding: 5rem 1.5rem 4rem;
     }
-
-    .hamburger {
-        display: flex;
+    
+    .categories {
+        grid-template-columns: 1fr;
     }
-
-    .hero h1 {
-        font-size: 32px;
-    }
-
-    .hero p {
-        font-size: 16px;
+    
+    .courses-grid,
+    .teachers-grid {
+        grid-template-columns: 1fr;
     }
 }
